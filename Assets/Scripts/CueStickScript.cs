@@ -19,8 +19,6 @@ namespace Main
     void Start()
     {
          CS = this;
-         //Cursor.lockState = CursorLockMode.Confined;
-         //Cursor.visible = false;
          Movement = 3f;
          WaveLength = 2.4f;
          dragBall = true;

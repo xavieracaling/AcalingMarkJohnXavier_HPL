@@ -48,6 +48,8 @@ public class LevelClass : MonoBehaviour
     }
     private void Initialize() 
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
         OffsetBallCont = new Vector3(2.238f,-5.16f,-2.996f);
         Level = 1;
         ReductionTime = 0;
@@ -109,6 +111,7 @@ public class LevelClass : MonoBehaviour
         {
             GameOver();
             Manager.GameManager.GM.ShowGameOverContainer("YOU WIN!", Color.green);
+            
             return true;
         }
         else 

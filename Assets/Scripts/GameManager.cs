@@ -23,7 +23,8 @@ namespace Manager
     }
     public void ShowGameOverContainer(string message, Color c)
     {
-        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameOverContainer.SetActive(true);
         TextConditionGame.text = message;
         TextConditionGame.color = c;
