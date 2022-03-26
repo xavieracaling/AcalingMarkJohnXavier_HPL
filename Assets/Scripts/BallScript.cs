@@ -19,7 +19,7 @@ namespace Main
    public static void BallGotHit(Transform dir)
    {
         AudioManager.AM.AudioSourceList[0].Play();
-        RB.AddForce(dir.forward * Random.Range(3f - (3f * LevelClass.ReductionTime),8f - (8f * LevelClass.ReductionTime)), ForceMode.Impulse);
+        RB.AddForce(dir.forward * Random.Range(5f - (5f * LevelClass.ReductionTime),5f - (5f * LevelClass.ReductionTime)), ForceMode.Impulse);
    }
    void OnCollisionEnter(Collision other)
    {    

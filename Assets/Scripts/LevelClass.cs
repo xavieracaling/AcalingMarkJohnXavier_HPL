@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class LevelClass : MonoBehaviour
 {
-    private bool dragBall;
+    public static bool dragBall;
     private static int currentTime;
     private static int timeReduce;
     
@@ -47,7 +47,10 @@ public class LevelClass : MonoBehaviour
         
     }
     private void Initialize() 
-    {
+    {   
+        Manager.GameManager.GM.MessageFunction("DRAG THE BALL");
+        Manager.GameManager.GameIsInProgress = true;
+        dragBall = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
         OffsetBallCont = new Vector3(2.238f,-5.16f,-2.996f);
@@ -58,9 +61,16 @@ public class LevelClass : MonoBehaviour
         LC = this;
         StartCountdown();
     }
+
+   
     [ContextMenu("LoadLevel")]
     public  void LoadLevel ()
-    {   
+    {       
+            StopAllCoroutines();
+            Manager.GameManager.GM.MessageFunction("DRAG THE BALL");
+            Manager.GameManager.GameIsInProgress = true;
+            Main.CueStickScript.CS.ResetPosRot();
+            dragBall = true;
             Balls = 6;
             stopTime = true;
             Debug.Log("Good job you have proceeded to the next level!");
@@ -71,7 +81,6 @@ public class LevelClass : MonoBehaviour
             TimeLabel.text = $"{CurrentTime} SECONDS LEFT";
             LevelLabel.text = $"Level {Level}";
             SlowIncreaseLabel.text = $"SLOW:  {ReductionTime * 100}%";
-            StopAllCoroutines();
             StartCountdown();
             Reset();
 

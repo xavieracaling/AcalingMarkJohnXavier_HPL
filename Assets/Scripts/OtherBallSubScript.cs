@@ -5,9 +5,11 @@ using Manager;
 public class OtherBallSubScript : MonoBehaviour
 {
     private static Rigidbody rb;
+    private string[] shotsCall;
     private Vector3 startPos;
 
     private void Start() {
+            shotsCall= new string[]{"Good job!", "Nice!","Good one!", "Keep it up!"};
             rb = GetComponent<Rigidbody>();
             startPos = transform.position;
     }
@@ -25,7 +27,7 @@ public class OtherBallSubScript : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints.FreezePositionY;
             }
-            
+            GameManager.GM.StartShowMessage(shotsCall[Random.Range(0,shotsCall.Length-1)], Random.Range(1f,3f));
             
         }
         Debug.Log("Ontrigger");

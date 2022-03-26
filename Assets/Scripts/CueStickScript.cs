@@ -8,6 +8,8 @@ namespace Main
     public class CueStickScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    private Vector3 startPosition;
+    private Quaternion startRotation;
     public static CueStickScript CS;
     public Transform Ball;
     public Transform Point;
@@ -15,21 +17,32 @@ namespace Main
     public float Movement;
     public bool GameIsInProgress;
     public bool tt;
-    private bool dragBall;
+  
     void Start()
-    {
-         CS = this;
-         Movement = 3f;
-         WaveLength = 2.4f;
-         dragBall = true;
-         Manager.GameManager.GameIsInProgress = true;
+    {   
+         Initialize();
+         
     }
 
+    public void Initialize()
+    {
+        CS = this;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        
+        Movement = 3f;
+        WaveLength = 2.4f;
+    }
+    public void ResetPosRot()
+    {
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+    }
     // Update is called once per frame
     void Update()
     {
         CheckMouseTrigger();    
-        if(dragBall)
+        if(LevelClass.dragBall)
         {
             DragBall();
             return;
@@ -80,18 +93,19 @@ namespace Main
     }    
     public void CheckMouseTrigger()
     {
-        if(Input.GetMouseButtonDown(0) && !dragBall)
+        if(Input.GetMouseButtonDown(0) && !LevelClass.dragBall)
         {
              Manager.GameManager.ReadyToHit = true;
              
         }
-        if (Input.GetMouseButtonUp(0) && !dragBall)
+        if (Input.GetMouseButtonUp(0) && !LevelClass.dragBall)
         {
              Manager.GameManager.ReadyToHit = false; 
         }
-        if(Input.GetMouseButtonDown(0) && dragBall)
+        if(Input.GetMouseButtonDown(0) && LevelClass.dragBall)
         {
-             dragBall = false;
+             Manager.GameManager.GM.GameObjectActive(Manager.GameManager.GM.MessageContainer,false);
+             LevelClass.dragBall = false;
              Manager.GameManager.GameIsInProgress = false;
              
         }
